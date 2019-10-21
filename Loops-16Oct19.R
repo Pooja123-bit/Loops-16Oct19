@@ -135,8 +135,13 @@ for(i in 1:nrow(t)) {
 
 t<-data.frame(f_g-seq(0,1000,1))
 y<-seq(1,10,0.5)
-x<-seq(1,10,0.5)
+x<-seq(1,20,1)
 
-for(i in 1:length(x)) {
-  output<-y[i] + x[k]
+d<-data.frame(interation = seq(1,10,0.5))
+
+for(i in 1:length(y)) {
+  for(k in 1:10) {
+    
+  d$output<-y[i] + x[k]
+  }
 }
