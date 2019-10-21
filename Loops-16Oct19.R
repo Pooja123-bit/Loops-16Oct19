@@ -71,7 +71,7 @@ d$dateTime<-as.POSIXct(strptime(d$dateTime,format="%m/%d/%y %H:%M:%OS",
 #for loop
 #Starting with temperature conversion
 
-t<-data.frame(f_deg-seq(0,100,1))
+t<-data.frame(f_deg=seq(0,100,1))
 t$c_deg<-NA
 t$K_deg<-NA
 
@@ -89,7 +89,7 @@ for(i in 1:10 {
 
 #combine with if else, set a floor for temp
 
-t<-data.frame(f_deg-seq(0,100,1))
+t<-data.frame(f_deg=seq(0,100,1))
 t$c_deg<-NA
 t$K_deg<-NA
 t$rel_temp<-NA
@@ -104,7 +104,7 @@ for(i in 1:nrow(t)) {
 }
 
 #
-t<-data.frame(f_deg-seq(0,100,1))
+t<-data.frame(f_deg=seq(0,100,1))
 t$c_deg<-NA
 t$K_deg<-NA
 t$rel_temp<-NA
@@ -133,7 +133,7 @@ for(i in 1:nrow(t)) {
 
 #conditional statement
 
-t<-data.frame(f_g-seq(0,1000,1))
+t<-data.frame(f_g=seq(0,1000,1))
 y<-seq(1,10,0.5)
 x<-seq(1,20,1)
 
