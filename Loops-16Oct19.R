@@ -65,3 +65,78 @@ d$dateTime<-as.POSIXct(strptime(d$dateTime,format="%m/%d/%y %H:%M:%OS",
 
   return(d)
 },.inform=T,.progress = "text")
+
+10-21-2019------------For Loop
+
+#for loop
+#Starting with temperature conversion
+
+t<-data.frame(f_deg-seq(0,100,1))
+t$c_deg<-NA
+t$K_deg<-NA
+
+for(i in 1:nrow(t)) {
+  t[i,]$c_deg<-(t[i,]$f_deg - 32) * (9/5)
+  t[i,]$K_deg<-(t[i,]$c_deg - 273.15)
+}
+
+OR
+
+for(i in 1:10 {
+  t[i,]$c_deg<-(t[i,]$f_deg - 32) * (9/5)
+  t[i,]$K_deg<-(t[i,]$c_deg - 273.15)
+}
+
+#combine with if else, set a floor for temp
+
+t<-data.frame(f_deg-seq(0,100,1))
+t$c_deg<-NA
+t$K_deg<-NA
+t$rel_temp<-NA
+
+for(i in 1:nrow(t)) {
+  t[i,]$c_deg<-(t[i,]$f_deg - 32) * (9/5)
+  t[i,]$K_deg<-(t[i,]$c_deg - 273.15)
+  
+  t[i,]$rel_temp<-ifelse(test=t[i,]$c_deg < 0,
+                         yes="cold",
+                         no="not cold")
+}
+
+#
+t<-data.frame(f_deg-seq(0,100,1))
+t$c_deg<-NA
+t$K_deg<-NA
+t$rel_temp<-NA
+
+goldilocks<-function(x) {
+  if (x<=0)
+    t[i,]$rel_temp<-"frozen"
+  
+  else if(x>0 & x<=50)
+    t[i,]$rel_temp<-"cold"
+  
+  else if(x>50 & x<=70)
+    t[i,]$rel_temp<-"warm"
+  
+  else if(x>50 & x<=70)
+    t[i,]$rel_temp<-"hot"
+  
+}
+
+for(i in 1:nrow(t)) {
+  
+  t[i,]$c_deg<-(t[i,]$f_deg - 32) * (9/5)
+  t[i,]$K_deg<-(t[i,]$c_deg - 273.15)
+  t[i,]$rel_temp<-goldilocks(x=t[i,]$c_deg)
+}
+
+#conditional statement
+
+t<-data.frame(f_g-seq(0,1000,1))
+y<-seq(1,10,0.5)
+x<-seq(1,10,0.5)
+
+for(i in 1:length(x)) {
+  output<-y[i] + x[k]
+}
