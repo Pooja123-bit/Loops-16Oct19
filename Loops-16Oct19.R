@@ -145,3 +145,77 @@ for(i in 1:length(y)) {
   d$output<-y[i] + x[k]
   }
 }
+
+10-23-2019----------GG plots
+
+library(ggplot2)
+
+load("fish_data.Rdata")
+
+fish.deep<-fish[fish$depth_fac =="Deep",]
+
+plot(x=fish.deep$parcel.start.lon,
+     y=fish.deep$parcel.start.lat)
+
+hist(log10(fish.parcel.density.m3))
+
+#ggplot functions
+
+ggplot(data=mpg, aes(x=displ,y=hwy))+
+geom_point()
+
+ggplot(data=mpg, aes(x=displ,y=hwy))+
+geom_point(colour="red")
+
+ggplot(data=mpg, aes(x=displ,y=hwy, colour=class))+
+  geom_point()
+
+ggplot(data=mpg, aes(x=cty,y=hwy, colour=class))+
+  geom_point()
+
+#to check the no. of classes
+length(unique(mpg$class))
+
+#for manually changing colours in the plot
+ggplot(data=mpg, aes(x=displ,y=hwy, colour=class))+
+  geom_point()+
+  scale_colour_manual(values=c("firebrick","dodgerblue", "darkgreen", 
+                             "goldenrod", "cornsilk2", "chocolate2", 
+                             "deeppink"))
+
+#ggplot2---line geom
+
+ggplot(data=mpg, aes(x=displ,y=hwy))+
+  geom_line()
+
+ggplot(data=mpg, aes(x=displ,y=hwy))+
+  geom_line()+
+facet_wrap(~class) 
+
+ggplot(data=mpg, aes(x=displ,y=hwy))+
+  geom_point()+
+  facet_wrap(~class, ncol=1)
+
+ggplot(data=mpg, aes(x=displ,y=hwy))+
+  geom_point()+
+  facet_wrap(~class, nrow=4)
+
+#Add a smoother
+ggplot(data=mpg, aes(x=displ,y=hwy))+
+  geom_point()+
+  geom_smooth()
+
+ggplot(data=mpg, aes(x=displ,y=hwy))+
+  geom_point()+
+  geom_smooth(method="lm")
+
+#Histograms
+ggplot(data=mpg, aes(x=displ,fill=drv))+
+  geom_histogram()
+
+ggplot(data=mpg, aes(x=displ,fill=drv))+
+  geom_histogram(binwidth=0.5)
+
+ggplot(data=mpg, aes(x=displ,colour=drv))+
+  geom_freqpoly(binwidth=0.5)
+
