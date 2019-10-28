@@ -219,3 +219,101 @@ ggplot(data=mpg, aes(x=displ,fill=drv))+
 ggplot(data=mpg, aes(x=displ,colour=drv))+
   geom_freqpoly(binwidth=0.5)
 
+10-28-2019
+
+library(ggplot2)
+
+#One geom:
+data(economics)
+e<- economics
+
+unemploy<- ggplot(data-e, aes(x=date,y=unemploy)) + geom_line()
+unemploy<- ggplot(data-e, aes(x=date,y=unemploy)) + 
+#multiple geoms
+data("presidential")
+pres<-presidential
+
+ggplot(e) + 
+  geom_rect(data=pres, aes(xmin= start, xmax= end, fill= party),
+ymin=-Inf, ymax=Inf, alpha=0.2) + 
+  geom_vline(data=pres,
+             aes(xintercept=as.numeric(start)),colour="grey50",alpha=0.5)+
+  geom_text(data=pres, aes(x=start, y=2500,
+                           label=name), size=3, vjust=0, hjust=0,nudge_x=50)
+
+ggplot(e) + 
+  geom_rect(data=pres, aes(xmin= start, xmax= end, fill= party),
+            ymin=-Inf, ymax=Inf, alpha=0.2) + 
+  scale_fill_manual(values=c("dodgerblue", "firebrick3"))
+  geom_vline(data=pres,
+             aes(xintercept=as.numeric(start)),colour="grey50",alpha=0.5)+
+  geom_text(data=pres, aes(x=start, y=2500,
+                           label=name), size=3, vjust=0, hjust=0,nudge_x=50)
+  
+caption<-paste(strwrap("Unemployment rates in the U.S. have varied a lot 
+over the years",20),
+                       collapse="\n")
+               yrng<-range(e$unemploy)
+               xrng<-range(e$date)
+ggplot(e) + 
+geom_rect(data=pres, aes(xmin= start, xmax= end, fill= party),
+ymin=-Inf, ymax=Inf, alpha=0.2) + 
+scale_fill_manual(values=c("dodgerblue", "firebrick3")) + 
+geom_vline(data=pres,
+aes(xintercept=as.numeric(start)),colour="grey50",alpha=0.5)+
+#geom_text(data=pres, aes(x=start, y=2500,
+#label=name), size=3, vjust=0, hjust=0,nudge_x=50) +
+  annotate("text", x=xrng[1], y=yrng[2],label=caption, hjust=0, vjust=1, 
+           size=4)
+
+caption<-paste(strwrap("Unemployment rates in the U.S. have varied a lot 
+over the years",40),
+               collapse="\n")
+yrng<-range(e$unemploy)
+xrng<-range(e$date)
+date<-as.Date("1960-01-01")
+
+ggplot(e) + 
+  geom_line(aes(x=date,y=unemploy))+
+  geom_rect(data=pres, aes(xmin= start, xmax= end, fill= party),
+            ymin=-Inf, ymax=Inf, alpha=0.2) + 
+  scale_fill_manual(values=c("dodgerblue", "firebrick3")) + 
+  geom_vline(data=pres,
+             aes(xintercept=as.numeric(start)),colour="grey50",alpha=0.5)+
+  #geom_text(data=pres, aes(x=start, y=2500,
+  #label=name), size=3, vjust=0, hjust=0,nudge_x=50) +
+  annotate("text", x=xrng[1], y=yrng[2],label=caption, hjust=0, vjust=1, 
+           size=4)
+
+#Bar graph challenge----
+#Stacked bar with grouped bar
+
+load("fish_data.Rdata")
+library(tidyverse)
+
+fs<-fish %>% group_by(area_fac, depth_fac, yr_fac) %>% 
+  summarise(parcel.count=length(parcel.id))
+
+ggplot(data = fs) + 
+  geom_bar(aes(x=area_fac, y=parcel.count, fill= depth_fac),
+           position="stack",
+           stat="Identity")
+
+#For getting up and down
+ggplot(data = fs) +  
+  geom_bar(aes(x=area_fac, y=parcel.count, fill= depth_fac),
+           position="stack",
+           stat="Identity")  +
+  facet_grid(yr_fac~.)
+
+#grouped bar-----
+ggplot(data = fs) +  
+  geom_bar(aes(x=area_fac, y=parcel.count, fill= depth_fac),
+           position="dodge",
+           stat="Identity") 
+           
+#Using the 'ddply' function to create multiply plots----
+
+
+
+
