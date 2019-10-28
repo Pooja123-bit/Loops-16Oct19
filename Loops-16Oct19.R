@@ -228,7 +228,7 @@ data(economics)
 e<- economics
 
 unemploy<- ggplot(data-e, aes(x=date,y=unemploy)) + geom_line()
-unemploy<- ggplot(data-e, aes(x=date,y=unemploy)) + 
+
 #multiple geoms
 data("presidential")
 pres<-presidential
