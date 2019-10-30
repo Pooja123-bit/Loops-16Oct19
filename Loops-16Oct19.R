@@ -314,6 +314,69 @@ ggplot(data = fs) +
            
 #Using the 'ddply' function to create multiply plots----
 
+10-30-2019
 
+library(plyr)
+library(tidyverse)
+load("fish_data.Rdata")
+ggplot(fish, aes(parcel.length.m, parcel.density.m3, color=depth_fac))+
+      geom_point()
 
+#Using 'ddply' to plot multiple objets-----
+ddply(.data=fish, .variables="depth_fac", function(x){
+pl= ggplot(x, aes(parcel.length.m, parcel.density.m3, color=depth_fac))+
+  geom_point()
+  name=unique(x$depth_fac)
+  ggsave(filename= paste0(name,'.tiff'),
+         plot=pl, width=4, height=3, units='in',
+         dpi=600, compression='lzw')
+}, .progress="text")
 
+##
+ddply(.data=fish, .variables="depth_fac", function(x){
+  name=unique(x$depth_fac)
+  pl= ggplot(x, aes(parcel.length.m, parcel.density.m3, color=depth_fac))+
+    geom_point()+
+  xlab('Parcel length (m)')+
+  ylab(expression(paste('Parcel Density(',m^3,')')))+
+    ggtitle(name)
+  ggsave(filename= paste0(name,'.tiff'),
+         plot=pl, width=4, height=3, units='in',
+         dpi=600, compression='lzw')
+}, .progress="text")
+
+##
+ggplot(fish, aes(parcel.length.m, parcel.density.m3))+
+  geom_point()+
+  ylab(expression(paste('Parcel Density(',m^3,')')))+
+  facet_wrap(~depth_fac)
+
+##plotting 3 variables----
+data("mtcars")
+
+ggplot(mtcars, aes(vs, cyl, fill=mpg))+
+geom_tile()
+
+ggplot(mtcars, aes(wt,mpg))+
+  geom_point(size=mtcars$cyl)
+
+#with title in graph
+ggplot(mtcars, aes(wt,mpg))+
+  geom_point(aes(size=mtcars$cyl))
+
+#with title in graph alongwith color
+ggplot(mtcars, aes(wt,mpg))+
+  geom_point(aes(size=mtcars$cyl, color=hp))
+
+#with title in graph, color & grids
+ggplot(mtcars, aes(wt,mpg))+
+  geom_point(aes(size=cyl, color=hp))+
+  theme_linedraw()
+
+#with title in graph, grids + Change colors
+ggplot(mtcars, aes(wt,mpg))+
+  geom_point(aes(color=hp))+
+  scale_color_continuous(type='viridis')+
+  theme_bw()
+
+  theme_bw
