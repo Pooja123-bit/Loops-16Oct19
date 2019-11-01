@@ -378,5 +378,3 @@ ggplot(mtcars, aes(wt,mpg))+
   geom_point(aes(color=hp))+
   scale_color_continuous(type='viridis')+
   theme_bw()
-
-  theme_bw
