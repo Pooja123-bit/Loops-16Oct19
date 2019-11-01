@@ -345,7 +345,7 @@ ddply(.data=fish, .variables="depth_fac", function(x){
          dpi=600, compression='lzw')
 }, .progress="text")
 
-##
+##Facet wrap for segregating the parameters in graph
 ggplot(fish, aes(parcel.length.m, parcel.density.m3))+
   geom_point()+
   ylab(expression(paste('Parcel Density(',m^3,')')))+
