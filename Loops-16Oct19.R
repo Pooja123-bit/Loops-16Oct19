@@ -319,6 +319,9 @@ ggplot(data = fs) +
 library(plyr)
 library(tidyverse)
 load("fish_data.Rdata")
+
+x<-fish
+
 ggplot(fish, aes(parcel.length.m, parcel.density.m3, color=depth_fac))+
       geom_point()
 
