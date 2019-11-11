@@ -146,6 +146,18 @@ for(i in 1:length(y)) {
   }
 }
 
+#for loop converting ug to g
+p = data.frame(1:10)
+p$grams = NA
+
+names(p) = c("micrograms","grams")
+
+for(x in 1:10){
+  p[x,]$grams = (p[x,]$micrograms *.000001)
+}
+
+
+
 10-23-2019----------GG plots
 
 library(ggplot2)
